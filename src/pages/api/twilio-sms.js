@@ -7,6 +7,7 @@ async function twilioSMS(req, res) {
         title: sms,
         text: sms,
         raw: sms,
+        type: 'TEST',
     });
     console.log({ sms, body, reqBody: req.body });
 
