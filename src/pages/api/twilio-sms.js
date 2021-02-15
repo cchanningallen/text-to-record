@@ -1,9 +1,14 @@
 const fetch = require('node-fetch');
 
 async function twilioSMS(req, res) {
-    console.log(req.body);
+    const data = fetch('./create-record', {
+        body: JSON.stringify({
+            title: req.body,
+            text: req.body,
+        }),
+    });
 
-    res.status(200).json({ hello: 'world!', reqBody: req.body });
+    res.status(200).json({ data });
 }
 
 exports.twilioSMS = twilioSMS;
