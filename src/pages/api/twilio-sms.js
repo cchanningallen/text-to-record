@@ -1,3 +1,5 @@
+import fetch from '../../util/fetch';
+
 async function twilioSMS(req, res) {
     const data = fetch('./create-record', {
         method: 'POST',

@@ -1,4 +1,4 @@
-const { hasuraRequest } = require('./util/hasura');
+const { hasuraRequest } = require('../../util/hasura');
 
 async function getRecords(req, res) {
     const data = await hasuraRequest({
