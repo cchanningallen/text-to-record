@@ -1,34 +1,23 @@
-export default (req, res) => {
-    // console.log({ req });
+const { hasuraRequest } = require('./util/hasura');
 
-    // TODO: Replace with fetched data
-    const records = [
-        {
-            title: 'AMRAP 7 mins',
-            type: 'EXERCISE',
-            time: '2021-01-29',
-            text: `
-AMRAP 7 mins
-- 5 strict pull-ups
-- 10 45lb dumbbell deadlifts
-- 15 20kg goblet squats
+async function getRecords(req, res) {
+    const data = await hasuraRequest({
+        query: `
+            query GetRecords {
+                textRecords {
+                    id
+                    createdAt
+                    text
+                    title
+                    type
+                }
+            }
+        `,
+        variables: {},
+    });
 
-Score: 3 + 22      
-            `,
-        },
-        {
-            title: '5x5 back squat, 40X1',
-            type: 'EXERCISE',
-            time: '2021-02-02',
-            text: `
-5x5 back squat, 40X1
+    res.status(200).json({ records: data.textRecords });
+}
 
-165lb
-
-Felt hard, but good!    
-            `,
-        },
-    ];
-
-    res.status(200).json({ records });
-};
+exports.getRecords = getRecords;
+export default getRecords;
