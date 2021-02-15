@@ -6,6 +6,7 @@ async function twilioSMS(req, res) {
         body: JSON.stringify({
             title: req.body,
             text: req.body,
+            raw: req.body,
         }),
     })
         .then((res) => res.json())
