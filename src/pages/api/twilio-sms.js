@@ -6,6 +6,7 @@ async function twilioSMS(req, res) {
         text: req.body,
         raw: req.body,
     });
+    console.log({ body, reqBody: req.body });
 
     const data = await fetch('/api/create-record', {
         method: 'POST',
