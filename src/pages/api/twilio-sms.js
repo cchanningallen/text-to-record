@@ -1,15 +1,20 @@
 import fetch from '../../util/fetch';
 
 async function twilioSMS(req, res) {
-    const data = fetch('./create-record', {
+    const data = await fetch('./create-record', {
         method: 'POST',
         body: JSON.stringify({
             title: req.body,
             text: req.body,
         }),
-    }).catch((err) => {
-        throw new Error(err);
-    });
+    })
+        .then((res) => res.json())
+        .catch((error) => {
+            console.error(error);
+            throw new Error(error);
+        });
+
+    console.log(data);
 
     res.status(200).json({ data });
 }
