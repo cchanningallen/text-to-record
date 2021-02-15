@@ -7,6 +7,8 @@ async function twilioSMS(req, res) {
             title: req.body,
             text: req.body,
         }),
+    }).catch((err) => {
+        throw new Error(err);
     });
 
     res.status(200).json({ data });
