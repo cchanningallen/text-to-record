@@ -1,20 +1,16 @@
-import fetch from '../../util/fetch';
+import request from '../../util/request';
 
 async function twilioSMS(req, res) {
+    validate(req);
     const sms = req.body.Body;
-
-    const body = JSON.stringify({
-        title: sms,
-        text: sms,
-        raw: sms,
-        type: 'TEST',
-    });
+    const parsedSMS = parseSMS(sms);
+    const body = JSON.stringify(parsedSMS);
     console.log({ sms, body, reqBody: req.body });
 
-    const data = await fetch('/api/create-record', {
-        method: 'POST',
-        body,
-    })
+    const data = await request
+        .post('/api/create-record', {
+            body,
+        })
         .then((res) => res.json())
         .catch((error) => {
             console.error(error);
@@ -24,6 +20,27 @@ async function twilioSMS(req, res) {
     console.log(data);
 
     res.status(200).json({ data, reqBody: req.body, body });
+}
+
+function validate(req) {
+    // TODO: Consider pushing down the callchain by validating
+    // against authed users' numbers from DB.
+    if (!process.env.APPROVED_TWILIO_FROM_NUMBERS.includes(req.body.From)) {
+        throw new Error('Sender not approved');
+    }
+}
+
+function parseSMS(sms) {
+    const lines = sms.split('\n');
+    const [title, ...text] = lines;
+    console.log('parseSMS', { lines });
+
+    return {
+        title,
+        text,
+        raw,
+        type: 'TEST', // for now
+    };
 }
 
 exports.twilioSMS = twilioSMS;

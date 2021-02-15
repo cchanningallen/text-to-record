@@ -15,9 +15,14 @@ export default function Home() {
         return <div className={mainStyles}>loading...</div>;
     }
 
+    // Sort by createdAt desc
+    const sortedRecords = data.records.sort(
+        (r1, r2) => new Date(r2.createdAt) - new Date(r1.createdAt)
+    );
+
     return (
         <div className={mainStyles}>
-            <RecordTimeline records={data.records} />
+            <RecordTimeline records={sortedRecords} />
         </div>
     );
 }
