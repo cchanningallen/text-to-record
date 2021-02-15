@@ -1,4 +1,4 @@
-const { hasuraRequest } = require('./util/hasura');
+const { hasuraRequest } = require('../../util/hasura');
 
 async function createRecord(req, res) {
     const { title, text, raw, type } = JSON.parse(req.body);
