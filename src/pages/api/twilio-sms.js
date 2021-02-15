@@ -1,5 +1,3 @@
-const fetch = require('node-fetch');
-
 async function twilioSMS(req, res) {
     const data = fetch('./create-record', {
         method: 'POST',
