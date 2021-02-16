@@ -54,6 +54,16 @@ function getStylesForType(type) {
                 indicator: 'bg-green-400',
                 record: '',
             };
+        case recordTypes.thought:
+            return {
+                indicator: 'bg-yellow-400',
+                record: '',
+            };
+        case recordTypes.meditation:
+            return {
+                indicator: 'bg-blue-400',
+                record: '',
+            };
         case recordTypes.test:
             return {
                 indicator: '',
