@@ -3,13 +3,23 @@ import TwilioSMSParser from './smsParser';
 
 const TEST_CASES = [
     {
-        title: 'single line > meditation',
+        title: 'single line > meditation lowercase',
         input: 'm30',
         expectedOutput: {
             title: 'Meditated for 30 minutes',
             text: '',
             type: recordTypes.meditation,
             raw: 'm30',
+        },
+    },
+    {
+        title: 'single line > meditation uppercase',
+        input: 'M5',
+        expectedOutput: {
+            title: 'Meditated for 5 minutes',
+            text: '',
+            type: recordTypes.meditation,
+            raw: 'M5',
         },
     },
     {

@@ -1,7 +1,7 @@
 import { recordTypes } from '../../constants';
 
 const MATCHERS = {
-    meditation: /^m(\d*)$/,
+    meditation: /^m(\d*)$/i,
 };
 const TEST_LINE_LENGTH_MAX = 20;
 
