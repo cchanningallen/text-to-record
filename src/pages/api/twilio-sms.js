@@ -2,7 +2,10 @@ import request from '../../util/request';
 import { TwilioSMSParser, TwilioValidator } from '../../services/twilio';
 
 async function twilioSMS(req, res) {
-    TwilioValidator.validate(req);
+    const error = new TwilioValidator(req).validate();
+    if (!!error) {
+        return res.status(404).json({ error });
+    }
 
     const sms = req.body.Body;
     const parsedSMS = new TwilioSMSParser(sms).parse();
