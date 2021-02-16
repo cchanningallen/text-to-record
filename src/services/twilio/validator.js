@@ -7,7 +7,10 @@ export default class TwilioValidator {
     validate() {
         // TODO: Consider pushing down the callchain by validating
         // against authed users' numbers from DB.
-        if (!process.env.APPROVED_TWILIO_FROM_NUMBERS.includes(req.body.From)) {
+        const senderApproved = process.env.APPROVED_TWILIO_FROM_NUMBERS.includes(
+            this._request.body.From
+        );
+        if (!senderApproved) {
             return { message: 'Sender not approved' };
         }
     }
