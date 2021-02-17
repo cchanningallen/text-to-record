@@ -1,4 +1,4 @@
-import request from '../../util/request';
+import requests from '../../util/requests';
 import { TwilioSMSParser, TwilioValidator } from '../../services/twilio';
 
 async function twilioSMS(req, res) {
@@ -12,7 +12,7 @@ async function twilioSMS(req, res) {
     const body = JSON.stringify(parsedSMS);
     console.log({ sms, parsedSMS, body, reqBody: req.body });
 
-    const data = await request
+    const data = await requests
         .post('/api/create-record', {
             body,
         })
