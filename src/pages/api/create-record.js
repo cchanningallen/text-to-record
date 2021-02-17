@@ -1,30 +1,63 @@
 const { hasuraRequest } = require('../../util/hasura');
 
+/*
+    This workaround is necessary because of how Hasura handles empty GQL field values
+    that are non-nullable + default at the DB level: Instead of just using the default
+    value, as expected, the API throws an error.
+    TODO: Figure out a cleaner way to do this.
+*/
+const GQL_DEFINITIONS = {
+    title: 'String!',
+    raw: 'String!',
+    text: 'String = ""',
+    type: 'String!',
+    createdAt: 'timestamptz',
+};
+
 async function createRecord(req, res) {
-    const { title, text, raw, type } = JSON.parse(req.body);
-    console.log({ title, text, raw, type });
+    const { title, text, raw, type, createdAt } = JSON.parse(req.body);
+    console.log({ title, text, raw, type, createdAt });
 
     const variables = {
         title,
-        text,
         raw,
+        text,
     };
     if (type) {
         variables.type = type;
     }
+    if (createdAt) {
+        variables.createdAt = createdAt;
+    }
+
+    const query = buildQuery(variables);
 
     const data = await hasuraRequest({
-        query: `
-            mutation CreateRecord($text: String!, $title: String!, $raw: String!, $type: String) {
-                insert_textRecords_one(object: {title: $title, text: $text, raw: $raw, type: $type}) {
-                    id
-                }
-            }
-        `,
+        query,
         variables,
     });
 
     res.status(200).json({ data });
+}
+
+function buildQuery(variables) {
+    const varNames = Object.keys(variables);
+
+    // Produces eg '$title: String!, $text: String!'
+    const typeDef = varNames
+        .map((name) => `$${name}: ${GQL_DEFINITIONS[name]}`)
+        .join(', ');
+
+    // Produces eg 'title: $title, text: $text'
+    const inputDef = varNames.map((name) => `${name}: $${name}`).join(', ');
+
+    return `
+        mutation CreateRecord(${typeDef}) {
+            insert_textRecords_one(object: {${inputDef}}) {
+                id
+            }
+        }
+    `;
 }
 
 exports.createRecord = createRecord;

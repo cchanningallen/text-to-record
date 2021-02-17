@@ -1,12 +1,14 @@
 import useSWR from 'swr';
+import Link from 'next/link';
 import RecordTimeline from '../components/RecordTimeline';
+import Button from '../components/Button';
+import { Plus } from '../components/icons';
 
 export default function Home() {
     const { data, error } = useSWR('/api/get-records', (url) =>
         fetch(url).then((res) => res.json())
     );
-    const mainStyles =
-        'flex items-center justify-center min-h-screen p-4 bg-gray-100';
+    const mainStyles = 'flex justify-center p-4';
 
     if (!!error) {
         return <div className={mainStyles}>failed to load</div>;
@@ -15,14 +17,9 @@ export default function Home() {
         return <div className={mainStyles}>loading...</div>;
     }
 
-    // Sort by createdAt desc
-    const sortedRecords = data.records.sort(
-        (r1, r2) => new Date(r2.createdAt) - new Date(r1.createdAt)
-    );
-
     return (
         <div className={mainStyles}>
-            <RecordTimeline records={sortedRecords} />
+            <RecordTimeline records={data.records} />
         </div>
     );
 }

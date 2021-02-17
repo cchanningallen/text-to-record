@@ -4,7 +4,7 @@ async function getRecords(req, res) {
     const data = await hasuraRequest({
         query: `
             query GetRecords {
-                textRecords {
+                textRecords(order_by: {createdAt: desc}) {
                     id
                     createdAt
                     text

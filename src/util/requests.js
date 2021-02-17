@@ -1,4 +1,4 @@
-class Request {
+class Requests {
     constructor({ host }) {
         this._host = host;
     }
@@ -25,6 +25,6 @@ const host =
         ? 'http://localhost:3000'
         : 'https://text-to-record.cchanningallen.vercel.app';
 
-export default new Request({
+export default new Requests({
     host,
 });
