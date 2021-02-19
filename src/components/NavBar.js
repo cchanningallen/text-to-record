@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Button from './Button';
-import { BookOpen, Plus } from './icons';
+import { BookOpen, Plus } from './icons/outline';
 
 export default function NavBar() {
     return (

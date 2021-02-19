@@ -29,6 +29,7 @@ export default function RecordTimelineItem({
                     </div>
                 </div>
             </div>
+
             <Record
                 className={`flex-auto my-2 ${styles.record}`}
                 id={id}
