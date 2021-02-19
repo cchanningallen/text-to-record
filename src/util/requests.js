@@ -21,9 +21,9 @@ class Requests {
 
 // TODO: Push into .env
 const host =
-    process.env.NODE_ENV !== 'production'
-        ? 'http://localhost:3000'
-        : 'https://text-to-record.cchanningallen.vercel.app';
+    process.env.NODE_ENV === 'production'
+        ? 'https://text-to-record.cchanningallen.vercel.app'
+        : 'http://localhost:3000';
 
 export default new Requests({
     host,

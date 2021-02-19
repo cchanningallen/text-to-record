@@ -1,8 +1,5 @@
 import useSWR from 'swr';
-import Link from 'next/link';
 import RecordTimeline from '../components/RecordTimeline';
-import Button from '../components/Button';
-import { Plus } from '../components/icons';
 
 export default function Home() {
     const { data, error } = useSWR('/api/get-records', (url) =>
