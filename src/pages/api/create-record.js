@@ -11,7 +11,7 @@ const GQL_DEFINITIONS = {
     raw: 'String!',
     text: 'String = ""',
     type: 'String!',
-    createdAt: 'timestamptz',
+    created_at: 'timestamptz',
 };
 
 async function createRecord(req, res) {
@@ -27,7 +27,7 @@ async function createRecord(req, res) {
         variables.type = type;
     }
     if (createdAt) {
-        variables.createdAt = createdAt;
+        variables.created_at = createdAt;
     }
 
     const query = buildQuery(variables);
@@ -53,7 +53,7 @@ function buildQuery(variables) {
 
     return `
         mutation CreateRecord(${typeDef}) {
-            insert_textRecords_one(object: {${inputDef}}) {
+            insert_text_records_one(object: {${inputDef}}) {
                 id
             }
         }
