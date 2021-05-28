@@ -1,23 +1,11 @@
-const { hasuraRequest } = require('../../util/hasura');
+import { validateRequest } from '../../services/auth/validate';
+import db from '../../services/db';
 
 async function getRecords(req, res) {
-    const data = await hasuraRequest({
-        query: `
-            query GetRecords {
-                textRecords: text_records(order_by: {created_at: desc}) {
-                    id
-                    createdAt: created_at
-                    text
-                    title
-                    type
-                }
-            }
-        `,
-        variables: {},
-    });
-
-    res.status(200).json({ records: data.textRecords });
+    const ctx = await validateRequest(req);
+    if (!ctx.user) return res.status(401);
+    const records = await db.records.get({ userID: ctx.user.id });
+    res.status(200).json({ records });
 }
 
-exports.getRecords = getRecords;
 export default getRecords;

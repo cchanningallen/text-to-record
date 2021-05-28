@@ -5,4 +5,11 @@ const recordTypes = {
     thought: 'THOUGHT',
 };
 
-export { recordTypes };
+const hasuraClaimsKey = 'https://hasura.io/jwt/claims';
+
+const roles = {
+    admin: 'admin',
+    user: 'user',
+};
+
+export { recordTypes, hasuraClaimsKey, roles };
