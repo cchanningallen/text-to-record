@@ -5,7 +5,7 @@ const TEST_CASES = [
         title: 'valid',
         input: {
             body: {
-                From: '+11112223333',
+                From: '+18042294822',
             },
         },
         expectedOutput: undefined,
@@ -24,9 +24,9 @@ const TEST_CASES = [
 ];
 
 const testFunc = ({ title, input, expectedOutput }) => {
-    test(`TwilioValidator: ${title}`, () => {
+    test(`TwilioValidator: ${title}`, async () => {
         const validator = new TwilioValidator(input);
-        const output = validator.validate();
+        const output = await validator.validate();
         expect(output).toEqual(expectedOutput);
     });
 };

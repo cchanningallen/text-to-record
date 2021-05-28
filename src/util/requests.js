@@ -4,27 +4,28 @@ class Requests {
     }
 
     get(url, config = {}) {
-        return fetch(this._absoluteURL(url), config);
+        return fetch(this.absoluteURL(url), config);
     }
 
     post(url, config = {}) {
-        return fetch(this._absoluteURL(url), {
+        return fetch(this.absoluteURL(url), {
             method: 'POST',
             ...config,
         });
     }
 
-    _absoluteURL(url) {
+    put(url, config = {}) {
+        return fetch(this.absoluteURL(url), {
+            method: 'PUT',
+            ...config,
+        });
+    }
+
+    absoluteURL(url) {
         return `${this._host}${url}`;
     }
 }
 
-// TODO: Push into .env
-const host =
-    process.env.NODE_ENV === 'production'
-        ? 'https://text-to-record.cchanningallen.vercel.app'
-        : 'http://localhost:3000';
-
 export default new Requests({
-    host,
+    host: process.env.NEXT_PUBLIC_ROOT_URL,
 });

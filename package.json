@@ -7,7 +7,7 @@
         "build": "next build",
         "start": "next start",
         "lint": "eslint --ext .js,.jsx",
-        "test": "APPROVED_TWILIO_FROM_NUMBERS=['+11112223333'] jest"
+        "test": "jest"
     },
     "husky": {
         "hooks": {
@@ -17,8 +17,11 @@
     "dependencies": {
         "@tailwindcss/forms": "^0.2.1",
         "autoprefixer": "^10.2.4",
+        "classnames": "^2.3.1",
+        "jsonwebtoken": "^8.5.1",
         "moment": "^2.29.1",
         "next": "10.0.6",
+        "next-auth": "^3.6.1",
         "postcss": "^8.2.6",
         "react": "17.0.1",
         "react-dom": "17.0.1",

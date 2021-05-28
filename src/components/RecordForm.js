@@ -1,8 +1,10 @@
 import React from 'react';
 import { recordTypes } from '../constants';
-import { toTitleCase } from '../util/strings';
+import strings from '../util/strings';
 import RecordTimeline from '../components/RecordTimeline';
 import Button from '../components/Button';
+import TextInput from '../components/TextInput';
+import cn from 'classnames';
 
 const TYPE_OPTIONS = [
     '', // == unselected
@@ -49,12 +51,17 @@ export default class RecordForm extends React.Component {
         return (
             <label className="block mb-4">
                 <span className="text-gray-700">Title</span>
-                <input
+                <TextInput
+                    type="text"
+                    value={this.state.title}
+                    onChange={(title) => this.setState({ title })}
+                />
+                {/* <input
                     type="text"
                     className="mt-1 block w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0"
                     value={this.state.title}
                     onChange={(e) => this.setState({ title: e.target.value })}
-                />
+                /> */}
             </label>
         );
     }
@@ -70,7 +77,7 @@ export default class RecordForm extends React.Component {
                 >
                     {TYPE_OPTIONS.map((value, i) => (
                         <option key={i} value={value}>
-                            {toTitleCase(value)}
+                            {strings.toTitleCase(value)}
                         </option>
                     ))}
                 </select>
@@ -133,6 +140,7 @@ export default class RecordForm extends React.Component {
         return (
             <Button
                 disabled={this._isDisabled()}
+                loading={this.props.loading}
                 className="w-full"
                 onClick={this._submit}
             >
