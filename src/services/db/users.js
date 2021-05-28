@@ -9,6 +9,7 @@ const GQL_USER_RESPONSE = `
     email
     emailVerified: email_verified
     phone
+    role
 `;
 
 const GQL_DEFINITIONS = {
@@ -115,12 +116,9 @@ class Users {
     async getByPhone(phone) {
         const variables = { phone };
         const query = GQL_FRAGMENTS.getByPhone();
-        console.log('getByPhone(phone)');
-        console.log({ variables, query });
 
         const { data, errors } = await hasuraRequest({ query, variables });
         // TODO: Improve error-handling story.
-        console.log({ data, errors });
         if (errors) throw new DBError(JSON.stringify({ errors }));
 
         return data.users[0];

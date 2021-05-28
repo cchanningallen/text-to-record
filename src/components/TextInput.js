@@ -81,7 +81,7 @@ class TextInput extends React.Component {
 
     _getFormatter() {
         switch (this.props.type) {
-            case 'phone':
+            case 'tel':
                 return FORMATTERS.phone;
             case 'text':
             default:

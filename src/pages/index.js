@@ -7,7 +7,6 @@ export default function Home() {
         fetch(url).then((res) => res.json())
     );
     const mainStyles = 'flex justify-center p-4 min-h-screen';
-    console.log({ data, error });
 
     if (!!error) {
         return <div className={mainStyles}>failed to load</div>;
