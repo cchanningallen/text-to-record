@@ -43,7 +43,7 @@ const GQL_FRAGMENTS = {
         }
     `,
     getByPhone: () => `
-        query GetUserByEmail($phone: String!) {
+        query GetUserByPhone($phone: String!) {
             users(limit: 1, where: {phone: {_eq: $phone}}) {
                 ${GQL_USER_RESPONSE}
             }
@@ -120,6 +120,7 @@ class Users {
 
         const { data, errors } = await hasuraRequest({ query, variables });
         // TODO: Improve error-handling story.
+        console.log({ data, errors });
         if (errors) throw new DBError(JSON.stringify({ errors }));
 
         return data.users[0];
