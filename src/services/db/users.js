@@ -17,14 +17,13 @@ const GQL_DEFINITIONS = {
     image: 'String',
     email: 'String',
     phone: 'String',
-    email_verified: 'timestamptz',
     updated_at: 'timestamptz!',
 };
 
 const GQL_FRAGMENTS = {
     create: () => `
-        mutation CreateUser($name: String, $image: String, $email: String, $email_verified: timestamptz) {
-            user: insert_users_one(object: {name: $name, email: $email, image: $image, email_verified: $email_verified}) {
+        mutation CreateUser($name: String, $image: String, $email: String) {
+            user: insert_users_one(object: {name: $name, email: $email, image: $image}) {
                 ${GQL_USER_RESPONSE}
             }
         }
@@ -76,12 +75,11 @@ const GQL_FRAGMENTS = {
 };
 
 class Users {
-    async create({ name, email, image, emailVerified }) {
+    async create({ name, email, image }) {
         const variables = {
             name,
             image,
             email,
-            email_verified: emailVerified,
         };
         const query = GQL_FRAGMENTS.create();
 
@@ -149,14 +147,7 @@ class Users {
         if (phone) {
             variables.phone = phone;
         }
-        // TODO: Uncomment if/when we allow this to be updated outside the
-        // Hasura GUI. Will likely depend on db-level permissions, either fully
-        // through hasura or by introducting something like a db context.
-        //
-        // if (emailVerified) {
-        //     // Coerce to Postgres-required ISO timestamp
-        //     variables.email_verified = moment(emailVerified).format();
-        // }
+
         const queryInputs = buildQueryInputs(variables, GQL_DEFINITIONS);
         const query = GQL_FRAGMENTS.update(queryInputs);
 
