@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { createContext, useContext } from 'react';
 import { useSession } from 'next-auth/client';
 import useSWR from 'swr';
 import SignIn from './SignIn';
-import Loader from './Loader';
+import LoadingScreen from './LoadingScreen';
 import PageLayout from './PageLayout';
 import AddPhone from './AddPhone';
+
+const AuthContext = createContext();
 
 export default function AuthWrapper({ children }) {
     const [session, loading] = useSession();
@@ -13,11 +15,7 @@ export default function AuthWrapper({ children }) {
     );
 
     if (loading) {
-        return (
-            <PageLayout>
-                <Loader className="w-8" />
-            </PageLayout>
-        );
+        return <LoadingScreen />;
     }
 
     if (!session) {
@@ -52,5 +50,9 @@ export default function AuthWrapper({ children }) {
         );
     }
 
-    return children;
+    return <AuthContext.Provider value={data}>{children}</AuthContext.Provider>;
+}
+
+export function useAuthContext() {
+    return useContext(AuthContext);
 }

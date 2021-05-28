@@ -56,12 +56,6 @@ export default class RecordForm extends React.Component {
                     value={this.state.title}
                     onChange={(title) => this.setState({ title })}
                 />
-                {/* <input
-                    type="text"
-                    className="mt-1 block w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0"
-                    value={this.state.title}
-                    onChange={(e) => this.setState({ title: e.target.value })}
-                /> */}
             </label>
         );
     }

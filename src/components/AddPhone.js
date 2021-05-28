@@ -32,6 +32,7 @@ export default function AddPhone({ userID, onComplete }) {
                 📲&nbsp;&nbsp;Add your phone number
             </h1>
             <TextInput
+                type="tel"
                 className="p-2 mb-12 text-3xl font-semibold tracking-widest text-center"
                 value={phone}
                 onChange={(phone) => setPhone(phone)}
