@@ -2,7 +2,7 @@ import React from 'react';
 import cn from 'classnames';
 
 const FORMATTERS = {
-    text: {
+    phone: {
         parse: (val) => {
             return val.replace(/[^0-9.]/g, '');
         },
@@ -22,7 +22,7 @@ const FORMATTERS = {
             return part1;
         },
     },
-    phone: {
+    text: {
         parse: (val) => {
             return val;
         },
@@ -81,6 +81,8 @@ class TextInput extends React.Component {
 
     _getFormatter() {
         switch (this.props.type) {
+            case 'phone':
+                return FORMATTERS.phone;
             case 'text':
             default:
                 return FORMATTERS.text;
