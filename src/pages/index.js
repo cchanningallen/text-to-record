@@ -20,7 +20,7 @@ export default function Home() {
     }
 
     // TODO: Rewrite this, it's trash
-    if (!data.records) {
+    if (!data.records || data.records.length == 0) {
         let greeting = '👋  Welcome';
         if (authCtx.name) {
             const firstName = authCtx.name.split(' ')[0];
