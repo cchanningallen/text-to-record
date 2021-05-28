@@ -115,6 +115,8 @@ class Users {
     async getByPhone(phone) {
         const variables = { phone };
         const query = GQL_FRAGMENTS.getByPhone();
+        console.log('getByPhone(phone)');
+        console.log({ variables, query });
 
         const { data, errors } = await hasuraRequest({ query, variables });
         // TODO: Improve error-handling story.
