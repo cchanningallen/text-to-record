@@ -1,5 +1,9 @@
 import requests from '../../util/requests';
-import { TwilioSMSParser, TwilioValidator } from '../../services/twilio';
+import {
+    TwilioSMSParser,
+    TwilioValidator,
+    TwilioMessagingResponse,
+} from '../../services/twilio';
 import db from '../../services/db';
 
 async function twilioSMS(req, res) {
@@ -20,8 +24,11 @@ async function twilioSMS(req, res) {
         ...parsedSMS,
         userID: sender.id,
     });
+    console.log('Created record', { data });
 
-    res.status(200).json({ data });
+    const twilioResponse = new TwilioMessagingResponse();
+    res.writeHead(200, { 'Content-Type': 'text/xml' });
+    res.end(twilioResponse.toString());
 }
 
 exports.twilioSMS = twilioSMS;
