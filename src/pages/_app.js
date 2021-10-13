@@ -26,11 +26,11 @@ export default function App({ Component, pageProps }) {
             }}
             session={pageProps.session}
         >
-            <NavBar />
             <AuthWrapper>
+                <NavBar />
                 <Component {...pageProps} />
+                <Footer />
             </AuthWrapper>
-            <Footer />
         </Provider>
     );
 }

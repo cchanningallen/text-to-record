@@ -37,12 +37,16 @@ function TestSms() {
                 alert(
                     "😬 Something's amiss! Sorry about that 😅\n\n👉 Please poke an admin to investigate 👈"
                 );
+                setLoading(false);
             });
     };
+
+    const initialPhone = auth.phone.slice(2); // Remove '+1' at beginning
 
     return (
         <PageLayout simple>
             <TestSMSForm
+                initialPhone={initialPhone}
                 headerText={'Test SMS'}
                 loading={loading}
                 onSubmit={onSubmit}

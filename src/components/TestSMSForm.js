@@ -7,7 +7,7 @@ export default class TestSMSForm extends React.Component {
         super(props);
 
         this.state = {
-            from: '',
+            from: props.initialPhone || '',
             sms: '',
         };
     }

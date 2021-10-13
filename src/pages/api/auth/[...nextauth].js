@@ -39,7 +39,7 @@ export default NextAuth({
         jwt: true,
 
         // Seconds - How long until an idle session expires and is no longer valid.
-        // maxAge: 30 * 24 * 60 * 60, // 30 days
+        maxAge: 30 * 24 * 60 * 60, // 30 days
 
         // Seconds - Throttle how frequently to write to database to extend a session.
         // Use it to limit write operations. Set to 0 to always update the database.
@@ -63,7 +63,7 @@ export default NextAuth({
                 name: token.name,
                 email: token.email,
                 iat: Date.now() / 1000,
-                exp: Math.floor(Date.now() / 1000) + 24 * 60 * 60,
+                exp: Math.floor(Date.now() / 1000) + maxAge,
                 // NOTE: This code is WIP, and currently unused.
                 // TODO: Fix this to allow direct GQL queries from the UI to
                 // Hasura for auth'd users.
