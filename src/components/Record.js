@@ -6,7 +6,7 @@ export default function Record({ className, title, createdAt, type, text }) {
     let renderedText = text;
     if (text.startsWith('http')) {
         renderedText = (
-            <a className="link" href="text">
+            <a className="link" href={text}>
                 {text}
             </a>
         );
