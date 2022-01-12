@@ -77,6 +77,33 @@ Result: 25:12`,
 Result: 25:12`,
         },
     },
+    {
+        title: 'multi line > categorized as quote',
+        input: `q
+Mood follows action`,
+        expectedOutput: {
+            title: 'Quote',
+            text: 'Mood follows action',
+            type: recordTypes.quote,
+            raw: `q
+Mood follows action`,
+        },
+    },
+    {
+        title: 'multi line > categorized as thought',
+        input: `T
+
+Today has been a beautiful odyssey through dreams that feel only divergent from reality through my own decision.`,
+        expectedOutput: {
+            title: 'Thought',
+            text:
+                'Today has been a beautiful odyssey through dreams that feel only divergent from reality through my own decision.',
+            type: recordTypes.thought,
+            raw: `T
+
+Today has been a beautiful odyssey through dreams that feel only divergent from reality through my own decision.`,
+        },
+    },
 ];
 
 const testFunc = ({ title, input, expectedOutput }) => {
