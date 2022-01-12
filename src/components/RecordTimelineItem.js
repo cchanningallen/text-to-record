@@ -31,7 +31,7 @@ export default function RecordTimelineItem({
             </div>
 
             <Record
-                className={`flex-auto my-2 ${styles.record}`}
+                className={`my-2 flex-initial ${styles.record}`}
                 id={id}
                 title={title}
                 createdAt={createdAt}
@@ -63,6 +63,11 @@ function getStylesForType(type) {
             return {
                 indicator: '',
                 record: 'opacity-50',
+            };
+        case recordTypes.quote:
+            return {
+                indicator: 'bg-purple-400',
+                record: '',
             };
         default:
             return {

@@ -4,6 +4,7 @@ const recordTypes = {
     meditation: 'MEDITATION',
     thought: 'THOUGHT',
     notion: 'NOTION',
+    quote: 'QUOTE',
 };
 
 const hasuraClaimsKey = 'https://hasura.io/jwt/claims';
