@@ -34,13 +34,13 @@ export default function HasuraNextAuthAdapter() {
 
         // Display debug output if debug option enabled
         function _debug(...args) {
-            // if (appOptions.debug) {
-            console.log('[next-auth][debug]', ...args);
-            // }
+            if (appOptions.debug) {
+                console.log('[next-auth][debug]', ...args);
+            }
         }
 
         // Store hashed token (using secret as salt) so that tokens cannot be exploited
-        // even if the contents of the database is compromised.
+        // even if the contents of the database are compromised.
         // @TODO Use bcrypt function here instead of simple salted hash
         function _buildHashedVerificationToken({ token, secret }) {
             return createHash('sha256')
